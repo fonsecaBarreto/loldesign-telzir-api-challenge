@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Region {
+  cod           Int          @id
+  name          String
+  originFares   RegionFare[] @relation("origin")
+  desitinyFares RegionFare[] @relation("destiny")
+
+  @@map("regions")
+}
+
+model RegionFare {
+  originCod     Int
+  destinyCod    Int
+  fare          Float
+  originRegion  Region @relation("origin", fields: [originCod], references: [cod], onDelete: Cascade)
+  destinyRegion Region @relation("destiny", fields: [destinyCod], references: [cod], onDelete: Cascade)
+
+  @@id([originCod, destinyCod])
+  @@map("regionFares")
+}
+
+model FranchisePlan {
+  id               Int    @id @default(autoincrement())
+  label            String
+  franchiseMinutes Float
+
+  @@map("franchisePlans")
+}
