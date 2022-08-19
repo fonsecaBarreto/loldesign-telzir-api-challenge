@@ -9,5 +9,5 @@ migrate dev command:
 deploy command:
     - docker exec -it telzir-prisma-migrate prisma migrate deploy
 
-seed deploy command: 
+seed command: 
     - docker exec -it telzir-prisma-migrate {{ seed script }}

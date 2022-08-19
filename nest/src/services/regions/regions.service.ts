@@ -1,5 +1,5 @@
+import { PrismaAdapterService } from "@/infra/prisma/prisma-adapter.service";
 import { Injectable } from "@nestjs/common";
-import { PrismaAdapterService } from "src/infra/prisma/prisma-adapter.service";
 
 @Injectable()
 export class RegionsService {
@@ -10,7 +10,7 @@ export class RegionsService {
     ]);
     return records;
   }
-  public async findbyId(regionCod: number): Promise<any> {
+  public async findByCod(regionCod: number): Promise<any> {
     const region = await this._repository.region.findUnique({
       where: { cod: regionCod },
     });
