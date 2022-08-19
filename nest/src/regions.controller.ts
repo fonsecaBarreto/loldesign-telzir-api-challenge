@@ -1,7 +1,7 @@
 import { Controller, Get } from "@nestjs/common";
 
 @Controller("regions")
-export class RidesController {
+export class RegionsController {
   @Get()
   async findAll(): Promise<any> {
     return [];
