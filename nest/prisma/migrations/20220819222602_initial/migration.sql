@@ -7,12 +7,12 @@ CREATE TABLE "regions" (
 );
 
 -- CreateTable
-CREATE TABLE "regionFares" (
+CREATE TABLE "regionsFares" (
     "originCod" INTEGER NOT NULL,
     "destinyCod" INTEGER NOT NULL,
     "fare" DOUBLE PRECISION NOT NULL,
 
-    CONSTRAINT "regionFares_pkey" PRIMARY KEY ("originCod","destinyCod")
+    CONSTRAINT "regionsFares_pkey" PRIMARY KEY ("originCod","destinyCod")
 );
 
 -- CreateTable
@@ -25,7 +25,7 @@ CREATE TABLE "franchisePlans" (
 );
 
 -- AddForeignKey
-ALTER TABLE "regionFares" ADD CONSTRAINT "regionFares_originCod_fkey" FOREIGN KEY ("originCod") REFERENCES "regions"("cod") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "regionsFares" ADD CONSTRAINT "regionsFares_originCod_fkey" FOREIGN KEY ("originCod") REFERENCES "regions"("cod") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "regionFares" ADD CONSTRAINT "regionFares_destinyCod_fkey" FOREIGN KEY ("destinyCod") REFERENCES "regions"("cod") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "regionsFares" ADD CONSTRAINT "regionsFares_destinyCod_fkey" FOREIGN KEY ("destinyCod") REFERENCES "regions"("cod") ON DELETE CASCADE ON UPDATE CASCADE;
