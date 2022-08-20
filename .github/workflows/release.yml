@@ -1,0 +1,20 @@
+
+name: Release
+
+on:
+  push:
+    branches: [ "main" ]
+    tags:
+      - v*
+env:
+  IMAGE_NAME: loldesign-telzir-api-challenge
+  REGISTRY_NAME: fonsecabarreto
+
+jobs:
+  pushToDockerHub:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: docker build -f api/Dockerfile --target production --tag $REGISTRY_NAME/$IMAGE_NAME ./api
+      - run: echo "${{secrets.DOCKERHUB_PASSWORD}}" | docker login -u ${{secrets.DOCKERHUB_USERNAME}} --password-stdin
+      - run: docker push $REGISTRY_NAME/$IMAGE_NAME:latest
