@@ -13,6 +13,14 @@ export class RegionsService {
   public async findByCod(regionCod: number): Promise<any> {
     const region = await this._repository.region.findUnique({
       where: { cod: regionCod },
+      include: {
+        destinyRegions: {
+          select: {
+            fare: true,
+            destinyRegion: true,
+          },
+        },
+      },
     });
     if (!region) return null;
     return region;
