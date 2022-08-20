@@ -1,4 +1,9 @@
-import { FranchisePlan, PrismaClient, Region, RegionsFare } from "@prisma/client";
+import {
+  FranchisePlan,
+  PrismaClient,
+  Region,
+  RegionsFare,
+} from "@prisma/client";
 import { estadoPorDdd } from "./ddds.json";
 import { tarifasPorEstados } from "./regionsFares.json";
 import { planos } from "./plans.json";

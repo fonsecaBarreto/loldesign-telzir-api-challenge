@@ -73,7 +73,17 @@ describe("Regions Services", () => {
     it("deve chamar repositorio com valores corretos", async () => {
       await sut.findByCod(2);
       expect(findSpy).toHaveBeenCalledTimes(1);
-      expect(findSpy).toHaveBeenCalledWith({ where: { cod: 2 } });
+      expect(findSpy).toHaveBeenCalledWith({
+        where: { cod: 2 },
+        include: {
+          destinyRegions: {
+            select: {
+              fare: true,
+              destinyRegion: true,
+            },
+          },
+        },
+      });
     });
 
     it("deve retornar dados", async () => {

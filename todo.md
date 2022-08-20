@@ -3,13 +3,13 @@
 
 * Criar uma seed inicial
 
-- /regions
+- [x] /regions
   - GET : deve retornar todas as regioes 
 
-- /regions/{regiao_cod}
+- [ ] /regions/{regiao_cod}
   - GET : deve retornar regiao pretendida e seus respectivos destinos cadastrados
   
-- /plans
+- [ ] /plans
   -  GET : deve retornar todas os planos  
 
 
