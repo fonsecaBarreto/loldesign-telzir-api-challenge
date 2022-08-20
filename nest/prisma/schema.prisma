@@ -8,15 +8,15 @@ datasource db {
 }
 
 model Region {
-  cod           Int          @id
+  cod           Int           @id
   name          String
-  originFares   RegionFare[] @relation("origin")
-  desitinyFares RegionFare[] @relation("destiny")
+  originFares   RegionsFare[] @relation("origin")
+  desitinyFares RegionsFare[] @relation("destiny")
 
   @@map("regions")
 }
 
-model RegionFare {
+model RegionsFare {
   originCod     Int
   destinyCod    Int
   fare          Float
@@ -24,7 +24,7 @@ model RegionFare {
   destinyRegion Region @relation("destiny", fields: [destinyCod], references: [cod], onDelete: Cascade)
 
   @@id([originCod, destinyCod])
-  @@map("regionFares")
+  @@map("regionsFares")
 }
 
 model FranchisePlan {

@@ -3,11 +3,11 @@
 
 $ docker-compose up -d prisma-migrate
 
+migrate dev command:
+    - docker exec -it telzir-prisma-migrate prisma migrate dev
+  
 deploy command:
     - docker exec -it telzir-prisma-migrate prisma migrate deploy
 
-migrate dev command:
-    - docker exec -it telzir-prisma-migrate prisma migrate dev
-
-seed deploy command: 
+seed command: 
     - docker exec -it telzir-prisma-migrate {{ seed script }}
