@@ -52,11 +52,7 @@ describe("RegionsController (e2e)", () => {
     });
 
     it("Deve retornar 200 em caso de sucesso.", () => {
-      return request(app.getHttpServer())
-        .get(URL(1))
-        .send()
-        .expect(200)
-        .expect(fakeRegions[1]);
+      return request(app.getHttpServer()).get(URL(1)).send().expect(200);
     });
   });
 });

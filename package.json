@@ -12,7 +12,7 @@
     "test:int": "docker exec -it telzir_api_test npm run test:int -- --watchAll ",
     "test:e2e": "docker exec -it telzir_api_test npm run test:e2e -- --watchAll ",
     "test:all": "docker exec telzir_api_test npm run test:all",
-    "prevtest:all": "npm run start:test && sleep 1"
+    "pretest:all": "npm run start:test && sleep 1"
   },
   "repository": {
     "type": "git",
