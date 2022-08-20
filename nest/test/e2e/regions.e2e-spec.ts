@@ -1,6 +1,6 @@
 import { INestApplication } from "@nestjs/common";
 import { Region } from "@prisma/client";
-import * as request from "supertest";
+import request from "supertest";
 import { CloseApp, MockApp, MockAppEnv } from "./app.mock";
 import { MockRegion } from "../mocks";
 
