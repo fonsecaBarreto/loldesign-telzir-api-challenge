@@ -2,17 +2,15 @@
   "name": "loldesign-telzir-api-challenge",
   "version": "1.0.0",
   "scripts": {
-    "start:dev": "docker-compose -f docker-compose.migrate.yml -f docker-compose.yml up --remove-orphans -d",
-    "db:migrate-dev": "docker exec -it telzir-prisma-migrate prisma migrate dev",
-    "db:migrate-deploy": "docker exec -it telzir-prisma-migrate prisma migrate deploy",
-    "db:seed": "docker exec -it telzir_api npx ts-node ./prisma/seed/index.ts",
-
-    "start:test": "docker-compose -f docker-compose.migrate.yml -f docker-compose.test.yml up --remove-orphans -d",
-    "test:unity": "docker exec -it telzir_api_test npm run test:unity -- --watchAll ",
-    "test:int": "docker exec -it telzir_api_test npm run test:int -- --watchAll ",
-    "test:e2e": "docker exec -it telzir_api_test npm run test:e2e -- --watchAll ",
-    "test:all": "docker exec telzir_api_test npm run test:all",
-    "pretest:all": "npm run start:test && sleep 1"
+    "dev": "docker-compose -f docker-compose.dev.yml up --remove-orphans",
+    "dev:seed": "docker exec -it telzir_api_dev npx ts-node ./prisma/seed/index.ts",
+    "test": "docker-compose -f docker-compose.dev.yml -f docker-compose.test.yml up --remove-orphans -d",
+    "test:ex": "docker exec -it telzir_api_test npm run",
+    "test:unity": "npm run test:ex test:unity -- --watchAll ",
+    "test:int": "npm run test:ex test:int -- --watchAll ",
+    "test:e2e": "npm run test:ex test:e2e -- --watchAll ",
+    "test:all": "npm run test:ex test:all",
+    "pretest:all": "npm run test && sleep 1"
   },
   "repository": {
     "type": "git",

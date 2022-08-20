@@ -3,20 +3,23 @@ services:
 
   api:
     container_name: telzir_api_test
-    command: tail -f /dev/null
-    build:
-      context: ./nest
-      target: development
     env_file:
       - ./config/.env.api.test
-    volumes:
-      - ./nest:/usr/src/app
-      - /usr/src/app/node_modules
+    depends_on:
+      - db_migrate
+      - db_test
+    command: tail -f /dev/null
+    networks:
+      - telzir-test
+      
+  db_migrate:
+    command: prisma migrate deploy
     depends_on:
       - db_test
-      - prisma-migrate
+    env_file:
+      - ./config/.env.api.test
     networks:
-      - test
+      - telzir-test
 
   db_test:
     container_name: telzir_db_test
@@ -27,17 +30,8 @@ services:
     ports:
       - 5435:5432
     networks:
-      - test
-
-  prisma-migrate:
-    command: prisma migrate deploy
-    depends_on:
-      - db_test
-    env_file:
-      - ./config/.env.api.test
-    networks:
-      - test
+      - telzir-test
 
 networks:
-  test:
+  telzir-test:
     driver: bridge

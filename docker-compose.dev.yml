@@ -1,0 +1,54 @@
+version: "3.8"
+services:
+
+  api:
+    container_name: telzir_api_dev
+    build:
+      context: ./nest
+      target: development
+    env_file:
+      - ./config/.env.api
+    ports:
+      - 9000:3000
+    volumes:
+      - ./nest:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - db_migrate
+      - db_dev
+    command: npm run start:dev
+    networks:
+      - telzir-dev
+
+  db_migrate:
+    command:  prisma migrate dev
+    build: ./nest/prisma
+    depends_on:
+      - db_dev
+    env_file:
+      - ./config/.env.api
+    volumes:
+      - ./nest/prisma:/app/prisma
+    networks:
+      - telzir-dev
+
+  db_dev:
+    container_name: telzir_db_dev
+    image: postgres:13
+    restart: always
+    env_file:
+      - ./config/.env.postgresql
+    ports:
+      - 5434:5432
+    volumes:
+      - postgres_dev:/var/lib/postgresql/data
+    networks:
+      - telzir-dev
+
+networks:
+  telzir-dev:
+    driver: bridge
+  
+volumes:
+  postgres_dev:
+    name: telzir-db_dev

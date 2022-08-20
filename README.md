@@ -26,3 +26,9 @@ sem o plano. O custo inicial de aquisição do plano deve ser desconsiderado par
 
 <img src="https://github.com/fonsecaBarreto/loldesign-telzir-api-challenge/blob/main/requirements/diagrama-classes.jpg" width="65%">
 
+
+- build
+
+docker build -f nest/Dockerfile --target production --tag telzir_stage ./nest --no-cache
+
+docker build -f nest/prisma/Dockerfile --tag telzir_stage_migrate ./nest/prisma --no-cache
