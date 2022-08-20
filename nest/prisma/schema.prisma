@@ -8,10 +8,10 @@ datasource db {
 }
 
 model Region {
-  cod           Int           @id
-  name          String
-  originFares   RegionsFare[] @relation("origin")
-  desitinyFares RegionsFare[] @relation("destiny")
+  cod            Int           @id
+  name           String
+  destinyRegions RegionsFare[] @relation("origin")
+  originRegions  RegionsFare[] @relation("destiny")
 
   @@map("regions")
 }
