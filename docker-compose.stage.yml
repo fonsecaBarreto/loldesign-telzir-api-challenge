@@ -1,0 +1,46 @@
+version: "3.8"
+services:
+
+  api_stage:
+    image: telzir_stage
+    env_file:
+      - ./config/.env.api.stage
+    ports:
+      - 9000:3000
+    depends_on:
+      - db_migrate
+    networks:
+      - telzir-stage
+
+  db_migrate:
+    command: prisma migrate deploy
+    build: ./nest/prisma
+    volumes:
+      - ./nest/prisma:/app/prisma
+    env_file:
+      - ./config/.env.api.stage
+    networks:
+      - telzir-stage
+    depends_on:
+      - db_stage
+
+  db_stage:
+    container_name: telzir_db_stage
+    image: postgres:13
+    restart: always
+    env_file:
+      - ./config/.env.postgresql
+    ports:
+      - 5436:5432
+    volumes:
+      - postgres_stage:/var/lib/postgresql/data
+    networks:
+      - telzir-stage
+
+networks:
+  telzir-stage:
+    driver: bridge
+
+volumes:
+  postgres_stage:
+    name: telzir-db_stage
