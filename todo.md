@@ -1,6 +1,8 @@
 
 # todo
 
+* Criar uma seed inicial
+
 - /regions
   - GET : deve retornar todas as regioes 
 
