@@ -33,13 +33,6 @@ services:
       - telzir-development
 
   prisma-migrate:
-    container_name: telzir-prisma-migrate
-    build: ./nest/prisma
-    env_file:
-      - ./config/.env.api
-    command: tail -f /dev/null
-    volumes:
-      - ./nest/prisma:/app/prisma
     networks:
       - telzir-development
     depends_on:

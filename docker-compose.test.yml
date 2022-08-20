@@ -30,13 +30,7 @@ services:
       - test
 
   prisma-migrate:
-    container_name: telzir-prisma-migrate
-    build: ./nest/prisma
     command: prisma migrate deploy
-    env_file:
-      - ./config/.env.api
-    volumes:
-      - ./nest/prisma:/app/prisma
     depends_on:
       - db
     networks:
