@@ -9,7 +9,7 @@
     "test:unity": "npm run test:ex test:unity -- --watchAll ",
     "test:int": "npm run test:ex test:int -- --watchAll ",
     "test:e2e": "npm run test:ex test:e2e -- --watchAll ",
-    "test:all": "docker exec -it telzir_api_test npm run test:all",
+    "test:all": "docker exec telzir_api_test npm run test:all",
     "pretest:all": "npm run test && sleep 1"
   },
   "repository": {
