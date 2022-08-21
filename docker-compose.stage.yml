@@ -2,7 +2,7 @@ version: "3.8"
 services:
 
   api_stage:
-    image: telzir_stage
+    image: fonsecabarreto/loldesign-telzir-api-challenge
     env_file:
       - ./config/.env.api.stage
     ports:
@@ -13,7 +13,7 @@ services:
       - telzir-stage
 
   db_migrate:
-    command: prisma migrate deploy
+    command: sh -c "prisma migrate deploy && node ./prisma/seed/index.js"
     build: ./nest/prisma
     volumes:
       - ./nest/prisma:/app/prisma
