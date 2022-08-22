@@ -1,0 +1,36 @@
+version: "3.8"
+services:
+
+  api_stage:
+    image: telzir_stage:latest
+    env_file:
+      - ./config/.env.api.stage
+    ports:
+      - 9000:3000
+    depends_on:
+      - db_stage
+    networks:
+      - telzir-stage
+    command: 
+        sh -c "npx prisma migrate deploy && node ./prisma/seed/index.js && node dist/src/main.js"
+
+  db_stage:
+    container_name: telzir_db_stage
+    image: postgres:13
+    restart: always
+    env_file:
+      - ./config/.env.postgresql
+    ports:
+      - 5436:5432
+    volumes:
+      - postgres_stage:/var/lib/postgresql/data
+    networks:
+      - telzir-stage
+
+networks:
+  telzir-stage:
+    driver: bridge
+
+volumes:
+  postgres_stage:
+    name: telzir-db_stage
