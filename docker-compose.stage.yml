@@ -2,34 +2,26 @@ version: "3.8"
 services:
 
   api_stage:
-    image: fonsecabarreto/loldesign-telzir-api-challenge
-    env_file:
-      - ./config/.env.api.stage
+    image: fonsecabarreto/loldesign-telzir-api-challenge:latest
+    environment:
+      - DATABASE_URL=postgresql://postgres:123@db_stage:5432/pgtelzir?schema=public
     ports:
       - 9000:3000
     depends_on:
-      - db_migrate
-    networks:
-      - telzir-stage
-
-  db_migrate:
-    command: sh -c "prisma migrate deploy && node ./prisma/seed/index.js"
-    build: ./nest/prisma
-    volumes:
-      - ./nest/prisma:/app/prisma
-    env_file:
-      - ./config/.env.api.stage
-    networks:
-      - telzir-stage
-    depends_on:
       - db_stage
+    networks:
+      - telzir-stage
+    command: 
+        sh -c "npx prisma migrate deploy && node ./prisma/seed/index.js && node dist/src/main.js"
 
   db_stage:
     container_name: telzir_db_stage
     image: postgres:13
     restart: always
-    env_file:
-      - ./config/.env.postgresql
+    environment:
+      - POSTGRES_DB=pgtelzir
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123
     ports:
       - 5436:5432
     volumes:

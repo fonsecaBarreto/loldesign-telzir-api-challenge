@@ -15,13 +15,12 @@ services:
       - /usr/src/app/node_modules
     depends_on:
       - db_migrate
-      - db_dev
     command: npm run start:dev
     networks:
       - telzir-dev
 
   db_migrate:
-    command:  prisma migrate dev
+    command: prisma migrate dev
     build: ./nest/prisma
     depends_on:
       - db_dev
