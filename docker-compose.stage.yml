@@ -1,6 +1,15 @@
 version: "3.8"
 services:
 
+  web:
+    image: fonsecabarreto/loldesign-telzir-web-challenge
+    ports:
+      - "8080:80"
+    depends_on:
+      - api_stage
+    networks:
+      - telzir-stage
+
   api_stage:
     image: fonsecabarreto/loldesign-telzir-api-challenge:latest
     environment:
@@ -24,8 +33,6 @@ services:
       - POSTGRES_PASSWORD=123
     ports:
       - 5436:5432
-    volumes:
-      - postgres_stage:/var/lib/postgresql/data
     networks:
       - telzir-stage
 
@@ -33,6 +40,3 @@ networks:
   telzir-stage:
     driver: bridge
 
-volumes:
-  postgres_stage:
-    name: telzir-db_stage

@@ -1,6 +1,8 @@
 
 # Desafio LOL Design - telzir
 
+Repositórios: [Frontend](https://github.com/fonsecaBarreto/loldesign-telzir-web-challenge) | [Backend](https://github.com/fonsecaBarreto/loldesign-telzir-api-challenge)
+
 
 ## Do Desafio:
 A empresa de telefonia Telzir, especializada em chamadas de longa distância nacional, vai colocar
@@ -20,13 +22,29 @@ códigos das cidades de origem e destino, o tempo da ligação em minutos e esco
 plano FaleMais. O sistema deve mostrar dois valores: (1) o valor da ligação com o plano e (2)
 sem o plano. O custo inicial de aquisição do plano deve ser desconsiderado para este problema.
 
-## Diagramas:
+## Como executar :
 
-- Diagrama de classes
+<pre><code>$ docker-compose -f docker-compose.stage.yml up
+</code></pre>
 
+Serão executados os seguintes serviços :
+- 1. Será instanciado um Banco de dados postgreSQL
+- 3. Rest api (NestJs)
+  - 3.1 Atualização dos esquemas para o banco de dados conforme o sql encontrado em ".nest/prisma/migrations"
+  - 3.2 Seeds iniciais serão injetadas
+  - 3.3 Aplicação inicializada
+- 4. Web SPA(React) 
+
+### Front-end rodando em:
+  <http://localhost:8080>
+### Back-end rodando em:
+  <http://localhost:9000>
+
+## Documentação :
+
+Swagger em: 
+<pre><code>$ localhost:9000/api
+</code></pre>
+
+Diagrama de classes:
 <img src="https://github.com/fonsecaBarreto/loldesign-telzir-api-challenge/blob/main/requirements/diagrama-classes.jpg" width="65%">
-
-
-- build
-
-docker build -f nest/Dockerfile --target production --tag telzir_stage ./nest --no-cache
